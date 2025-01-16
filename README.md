@@ -12,7 +12,7 @@ Con la ayuda de las bibliotecas **ML5.js** se podrá detectar los objetos para i
 
 ## Conversión en Pinceladas
 
-Cada objeto detectado se asigna a un tipo de pincelada o efecto visual específico. Por ejemplo: Manchas de pintura circulas, trazos o combinaciones de formas, esto con la ayuda de la biblioteca **p5.js**
+Cada objeto detectado se asigna a un tipo de pincelada o efecto visual específico. Por ejemplo: Manchas de pintura circulares, trazos o combinaciones de formas, esto con la ayuda de la biblioteca **p5.js**
 
 ## Creación del Lienzo
 
