@@ -8,7 +8,7 @@ Con un enfoque estético, la idea consiste en utilizar la cámara del dispositiv
 
 ## Detección de Objetos
 
-Con la ayuda de las bibliotecas **ML5.js** o **TensorFlow.js** se podrá detectar los objetos para identificarlos al ser capturados por la cámara.
+Con la ayuda de las bibliotecas **ML5.js** se podrá detectar los objetos para identificarlos al ser capturados por la cámara.
 
 ## Conversión en Pinceladas
 
@@ -16,7 +16,7 @@ Cada objeto detectado se asigna a un tipo de pincelada o efecto visual específi
 
 ## Creación del Lienzo
 
-Las pinceladas generadas se añadirían a este lienzo, el cuál puede ser dinámico o estático, para generar una interacción con el usuario.
+Las pinceladas generadas se añadirían a un lienzo, el cuál puede ser dinámico o estático, para generar una interacción con el usuario.
 
 ## Personalización
 
