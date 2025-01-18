@@ -3,6 +3,13 @@ let detector;
 let detections = [];
 let canvasGraphics; //Variable para manejar las pinceladas en un lienzo
 
+//Estos parámetros podrá configurar el usuario, según el tipo de interacción
+let brushType = "Circular"; //apariencia de la pincelada
+let colorPalette = "Arcoíris"; // paleta de colores
+let brushSize = 30; //tamaño de la pincelada
+let brushOpacity = 100; // Opacidad de la pincelada
+let dispersionMode = "Punto Único"; // modo de dispersión de las pinceladas
+
 function preload() {
   //Inicializa el detector de objetos con CocoSSD
   detector = ml5.objectDetector("cocossd", modelReady);
@@ -42,6 +49,50 @@ function setup() {
     console.log("Video cargado. Iniciando detección...");
     detector.detect(video, gotDetections);
   });
+
+  //Escoger apariencia
+  createP("Apariencia de la Pincelada");
+  let brushSelector = createSelect();
+  brushSelector.option("Circular");
+  brushSelector.option("Salpicar");
+  brushSelector.option("Línea");
+  brushSelector.option("Aleatorio");
+  brushSelector.changed(() => {
+    brushType = brushSelector.value();
+  });
+
+  //Escoger paleta de colores
+  createP("Paleta de Colores");
+  let paletteSelector = createSelect();
+  paletteSelector.option("Arcoíris");
+  paletteSelector.option("Tonos Rojos");
+  paletteSelector.option("Tonos Azules");
+  paletteSelector.option("Tonos Verdes");
+  paletteSelector.changed(() => {
+    colorPalette = paletteSelector.value();
+  });
+
+  //Elegir tamaño de la pincelada
+  createP("Tamaño de la Pincelada");
+  let sizeSlider = createSlider(10, 100, 30);
+  sizeSlider.input(() => {
+    brushSize = sizeSlider.value();
+  });
+
+  //Opacidad de pinceladas
+  createP("Opacidad de Pincelada");
+  let opacitySlider = createSlider(50, 255, 150);
+  opacitySlider.input(() => {
+    brushOpacity = opacitySlider.value();
+  });
+
+  //Elegir como se ubican las pinceladas
+  let dispersionSelector = createSelect();
+  dispersionSelector.option("Punto Único");
+  dispersionSelector.option("Dispersas");
+  dispersionSelector.changed(() => {
+    dispersionMode = dispersionSelector.value();
+  });
 }
 
 function draw() {
@@ -62,78 +113,108 @@ function draw() {
     stroke(0, 250, 0);
     strokeWeight(3);
     noFill();
-    rect(object.x, object.y, object.width, object.height);
+    rect(x, y, w, h);
     noStroke();
     fill(250);
     textSize(24);
-    text(object.label, object.x + 10, object.y + 24);
+    text(object.label, x + 10, y + 24);
 
-    //Según el objeto detectado, se genera diferentes efectos
-    switch (object.label) {
-      case "person":
-        drawCircularBrush(x + w / 2, y + h / 2);
+    let centerX = x + w / 2;
+    let centerY = y + h / 2;
+
+    //Pinceladas por tipo y modo de dispersión
+    switch (brushType) {
+      case "Circular":
+        applyBrush(drawCircularBrush, centerX, centerY);
         break;
-      case "bottle":
-        drawSplatterBrush(x + w / 2, y + h / 2);
+      case "Salpicar":
+        applyBrush(drawSplatterBrush, centerX, centerY);
         break;
-      case "chair":
-        drawLineBrush(x + w / 2, y + h / 2);
+      case "Línea":
+        applyBrush(drawLineBrush, centerX, centerY);
         break;
-      default:
-        drawRandomShapes(x + w / 2, y + h / 2);
+      case "Aleatorio":
+        applyBrush(drawRandomShapes, centerX, centerY);
         break;
     }
   }
 }
 
+//Aplicar pincel según el modo de dispersión
+function applyBrush(brushFunction, x, y) {
+  if (dispersionMode === "Punto Único") {
+    brushFunction(x, y, brushSize);
+  } else if (dispersionMode === "Dispersas") {
+    for (let i = 0; i < 5; i++) {
+      let offsetX = random(-50, 50); // Desplazamiento aleatorio en X
+      let offsetY = random(-50, 50); // Desplazamiento aleatorio en Y
+      brushFunction(x + offsetX, y + offsetY, brushSize);
+    }
+  }
+}
+
 //Dibujar pinceladas circulares
-function drawCircularBrush(x, y) {
+function drawCircularBrush(x, y, size) {
   canvasGraphics.noStroke();
-  canvasGraphics.fill(random(255), random(255), random(255), 150);
-  let size = random(20, 50);
+  canvasGraphics.fill(getColor(), brushOpacity);
   canvasGraphics.ellipse(x, y, size, size);
 }
 
 //Dibujar pinceladas tipo salpicaduras
-function drawSplatterBrush(x, y) {
+function drawSplatterBrush(x, y, size) {
   for (let i = 0; i < 10; i++) {
-    let offsetX = random(-30, 30);
-    let offsetY = random(-30, 30);
+    let offsetX = random(-size / 2, size / 2);
+    let offsetY = random(-size / 2, size / 2);
     canvasGraphics.noStroke();
-    canvasGraphics.fill(random(255), random(255), random(255), 100);
+    canvasGraphics.fill(getColor(), brushOpacity);
     canvasGraphics.ellipse(x + offsetX, y + offsetY, random(5, 15));
   }
 }
 
 //Dibujar pinceladas en línea
-function drawLineBrush(x, y) {
-  canvasGraphics.stroke(random(255), random(255), random(255), 150);
+function drawLineBrush(x, y, size) {
+  canvasGraphics.stroke(getColor(), brushOpacity);
   canvasGraphics.strokeWeight(random(3, 8));
-  canvasGraphics.line(x, y, x + random(-50, 50), y + random(-50, 50));
+  canvasGraphics.line(x, y, x + random(-size, size), y + random(-size, size));
 }
 
 //Dibujar formas aleatorias
-function drawRandomShapes(x, y) {
+function drawRandomShapes(x, y, size) {
   let shapeType = floor(random(3));
   canvasGraphics.noStroke();
-  canvasGraphics.fill(random(255), random(255), random(255), 150);
+  canvasGraphics.fill(getColor(), brushOpacity);
 
   switch (shapeType) {
     case 0: // Rectángulo
-      canvasGraphics.rect(x, y, random(20, 50), random(20, 50));
+      canvasGraphics.rect(x, y, random(10, size), random(10, size));
       break;
     case 1: // Triángulo
       canvasGraphics.triangle(
         x,
         y,
-        x + random(-30, 30),
-        y + random(-30, 30),
-        x + random(-30, 30),
-        y + random(-30, 30)
+        x + random(-size, size),
+        y + random(-size, size),
+        x + random(-size, size),
+        y + random(-size, size)
       );
       break;
     case 2: // Elipse
-      canvasGraphics.ellipse(x, y, random(20, 50), random(20, 50));
+      canvasGraphics.ellipse(x, y, random(10, size), random(10, size));
       break;
+  }
+}
+
+//Para la paleta de colores
+function getColor() {
+  switch (colorPalette) {
+    case "Tonos Rojos":
+      return color(random(200, 255), random(0, 100), random(0, 100));
+    case "Tonos Azules":
+      return color(random(0, 100), random(0, 100), random(200, 255));
+    case "Tonos Verdes":
+      return color(random(0, 100), random(200, 255), random(0, 100));
+    default:
+      "Aleatorio";
+      return color(random(255), random(255), random(255));
   }
 }

@@ -20,7 +20,7 @@ Las pinceladas generadas se añadirían a un lienzo, el cuál puede ser dinámic
 
 ## Personalización
 
-El usuario puede interactuar con la pintura en tiempo real (Posibles Consideraciones: apariencia de las pinceladas, elegir paletas de colores, tamaño u opacidad, sincronización con música, entre otros).
+El usuario puede interactuar con la pintura en tiempo real (Posibles Consideraciones: apariencia de las pinceladas, elegir paletas de colores, tamaño u opacidad, entre otros).
 
 # Desarrollo del Proyecto
 
