@@ -37,3 +37,15 @@ El usuario puede interactuar con la pintura en tiempo real (Posibles Consideraci
 `drawLineBrush(x,y)` dibuja una línea desde `(x,y)` hasta una posición aleatoria, grosor y color aleatorios, simula trazos en línea.
 
 `drawRandomShapes(x,y)` dibuja una forma aleatoria en `(x,y)`, entre rectángulos, triángulos y elipses.
+
+`dispersionMode` controla las pinceladas
+
+`applyBrush` evaluar el modo de dispersión y aplicar el pincel en dos puntos: único o dispersos.
+
+`applyBrush(brushFunction, x,y)` con esta función se aplica un pincel `brushFuntion` al objeto cuando se detecta
+
+`getColor()` devuelve un color basado en la paleta seleccionada, en cuatro variantes: tonos rojos, tonos, azules, tonos verdes y en arcoíris.
+
+`createP()` crear un elemento, se utilizan para textos con longitud de párrafo
+
+`switch` control de una o más sentencias de asignación de reglas, depende del valor de una expresión
