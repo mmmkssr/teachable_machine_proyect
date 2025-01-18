@@ -21,3 +21,19 @@ Las pinceladas generadas se añadirían a un lienzo, el cuál puede ser dinámic
 ## Personalización
 
 El usuario puede interactuar con la pintura en tiempo real (Posibles Consideraciones: apariencia de las pinceladas, elegir paletas de colores, tamaño u opacidad, sincronización con música, entre otros).
+
+# Desarrollo del Proyecto
+
+`preload()` carga el modelo de detección de objetos (CocoSSD) antes de que inicie la ejecución del programa. Cuando el modelo está listo, llama la función `modelReady()`, que notifica en la consola que el modelo se ha cargado correctamente.
+
+`gotDetections(error,results)` si ocurre un error se imprime en la consola y se detiene la ejecución. Si no hay error, se llama a `detector.detect()` para continuar detectando en el siguiente cuadro del video.
+
+`createGraphics` crea un lienzo secundario para superponer las pinceladas artísticas.
+
+`drawCircularBrush(x,y)` genera un pincel circular en la posición `(x,y)` con un color aleatorio y un tamaño aleatorio.
+
+`drawSplatterBrush(x,y)` simula un efecto de salpicaduras en la posición `(x,y)` en diferentes posiciones, con colores y tamaños aleatorios.
+
+`drawLineBrush(x,y)` dibuja una línea desde `(x,y)` hasta una posición aleatoria, grosor y color aleatorios, simula trazos en línea.
+
+`drawRandomShapes(x,y)` dibuja una forma aleatoria en `(x,y)`, entre rectángulos, triángulos y elipses.
