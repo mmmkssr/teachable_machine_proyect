@@ -32,6 +32,7 @@ function gotDetections(error, results) {
 }
 
 function setup() {
+  //frameRate(30);
   createCanvas(800, 600); //Lienzo principal del video
 
   //Lienzo secundario para las pinceladas
@@ -87,6 +88,7 @@ function setup() {
   });
 
   //Elegir como se ubican las pinceladas
+  createP("Modo de Dispersión");
   let dispersionSelector = createSelect();
   dispersionSelector.option("Punto Único");
   dispersionSelector.option("Dispersas");
@@ -96,6 +98,10 @@ function setup() {
 }
 
 function draw() {
+  //if (frameCount % 5 === 0) {
+  //detector.detect(video, gotDetections);
+  //}
+
   //Dibuja el video en el lienzo principal
   image(video, 0, 0);
 
@@ -158,6 +164,18 @@ function applyBrush(brushFunction, x, y) {
   }
 }
 
+function getColor() {
+  switch (colorPalette) {
+    case "Tonos Rojos":
+      return color(random(200, 255), random(0, 100), random(0, 100));
+    case "Tonos Azules":
+      return color(random(0, 100), random(0, 100), random(200, 255));
+    case "Tonos Verdes":
+      return color(random(0, 100), random(200, 255), random(0, 100));
+    default:
+      return color(random(255), random(255), random(255));
+  }
+}
 //Dibujar pinceladas circulares
 function drawCircularBrush(x, y, size) {
   canvasGraphics.noStroke();
@@ -206,20 +224,5 @@ function drawRandomShapes(x, y, size) {
     case 2: // Elipse
       canvasGraphics.ellipse(x, y, random(10, size), random(10, size));
       break;
-  }
-}
-
-//Para la paleta de colores
-function getColor() {
-  switch (colorPalette) {
-    case "Tonos Rojos":
-      return color(random(200, 255), random(0, 100), random(0, 100));
-    case "Tonos Azules":
-      return color(random(0, 100), random(0, 100), random(200, 255));
-    case "Tonos Verdes":
-      return color(random(0, 100), random(200, 255), random(0, 100));
-    default:
-      "Aleatorio";
-      return color(random(255), random(255), random(255));
   }
 }

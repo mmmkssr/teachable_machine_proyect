@@ -14,7 +14,13 @@ body {
   color: #858fb4;
   letter-spacing: 0.2rem;
 }
-
+p1 {
+  justify-content: center;
+  font-family: "Lexend", serif;
+  font-weight: 300;
+  align-items: center;
+  letter-spacing: 0rem;
+}
 p,
 select,
 input[type="range"] {
