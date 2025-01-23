@@ -99,3 +99,26 @@ option {
   color: #858fb4;
   justify-content: center;
 }
+
+button {
+  font-family: "Lexend", serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 2px solid #858fb4;
+  border-radius: 8px;
+  background: #f5f2f0;
+  color: #858fb4;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+  margin: 1rem 0;
+}
+
+button:hover {
+  border-color: #edb240;
+}
+
+button:focus {
+  border-color: #edb240;
+  background: linear-gradient(to right, #ccd1db, #f5f2f0);
+}

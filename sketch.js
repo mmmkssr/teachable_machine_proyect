@@ -95,6 +95,11 @@ function setup() {
   dispersionSelector.changed(() => {
     dispersionMode = dispersionSelector.value();
   });
+
+  let saveButton = createButton("Guardar Diseño");
+  saveButton.mousePressed(() => {
+    saveCanvas(canvasGraphics, "diseño", "png");
+  });
 }
 
 function draw() {
