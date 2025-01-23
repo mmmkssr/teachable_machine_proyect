@@ -6,19 +6,90 @@ body {
   align-items: center;
   height: 100vh;
   margin: 1rem 0;
+  background-color: #ccd1db;
+  font-family: "Indie Flower", serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 24px;
+  color: #858fb4;
+  letter-spacing: 0.2rem;
 }
 
 p,
 select,
 input[type="range"] {
-  margin: 0, 2rem;
+  margin: 0.5rem;
   text-align: center;
-  margin: 0, 5rem;
+  margin: 0.5rem;
+  font-family: "Lexend", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0rem;
 }
 
 canvas {
   display: block;
   margin: 20px auto;
-  border: 3px solid #7061f0;
+  border: 5px solid #858fb4;
   border-radius: 2rem;
+}
+
+/* sliders */
+input[type="range"] {
+  -webkit-appearance: none; /* Remueve estilos predeterminados en Webkit */
+  appearance: none;
+  width: 50%;
+  height: 10px;
+  background: linear-gradient(to right, #ff7f7f, #7f7fff, #7fff7f);
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s;
+}
+
+/* tamaño control */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #f5f2f0;
+  border: 2px solid #858fb4;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  background-color: #edb240;
+  transform: scale(1.2);
+}
+
+/* menús de opciones */
+select {
+  font-family: "Lexend", serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border: 2px solid #858fb4;
+  border-radius: 8px;
+  background: #f5f2f0;
+  color: #858fb4;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+select:hover {
+  border-color: #edb240;
+}
+
+select:focus {
+  border-color: #edb240;
+  background: linear-gradient(to right, #ccd1db, #f5f2f0);
+}
+
+option {
+  background: #f5f2f0;
+  color: #858fb4;
+  justify-content: center;
 }

@@ -49,3 +49,7 @@ El usuario puede interactuar con la pintura en tiempo real (Posibles Consideraci
 `createP()` crear un elemento, se utilizan para textos con longitud de párrafo
 
 `switch` control de una o más sentencias de asignación de reglas, depende del valor de una expresión
+
+`(detections.length === 0)` la condición if verifica si no hay objetos detectados.
+
+`canvas.Graphics.clear()` se borra el contenido previo del lienzo secundario

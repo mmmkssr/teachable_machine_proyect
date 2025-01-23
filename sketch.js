@@ -99,6 +99,11 @@ function draw() {
   //Dibuja el video en el lienzo principal
   image(video, 0, 0);
 
+  //Limpiar el lienzo secundario si no hay objetos detectados
+  if (detections.length === 0) {
+    canvasGraphics.clear();
+  }
+
   //Superpone las pinceladas generadas
   image(canvasGraphics, 0, 0);
 
@@ -110,13 +115,13 @@ function draw() {
     let w = object.width;
     let h = object.height;
 
-    stroke(0, 250, 0);
+    stroke(245, 242, 240);
     strokeWeight(3);
     noFill();
     rect(x, y, w, h);
     noStroke();
-    fill(250);
-    textSize(24);
+    fill(245, 242, 240);
+    textSize(20);
     text(object.label, x + 10, y + 24);
 
     let centerX = x + w / 2;
